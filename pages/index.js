@@ -5,12 +5,34 @@ import { useState } from 'react';
 
 const Home = () => {
   const [userInput, setUserInput] = useState('')
+  const [apiOutput, setApiOutput] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const callGenerate = async() => {
+    setIsGenerating(true);
+    
+    console.log("API calling prompt");
+
+    const res = await fetch("/api/generate", { //fetch from the file
+      method: 'POST', //specified in API
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({userInput}), //what is being sent through the req
+    });
+
+    const data = await res.json();
+    const { output } = data;
+    console.log("Output = ", output.text);
+
+    setApiOutput(`${output.text}`);
+    setIsGenerating(false);
+  }
   
   const setUserChangedInput = (event) =>{
-    // console.log(event.target.value);
+    console.log(JSON.stringify({userInput}));
     setUserInput(event.target.value);
   }
-
 
   return (
     <div className="root">
@@ -36,7 +58,7 @@ const Home = () => {
           />
         </div>
         <div className='prompt-buttons'>
-          <a className='generate-button' onClick={null}>
+          <a className='generate-button' onClick={callGenerate}>
             <div className='generate'>
               <p>Generate</p>
             </div>
