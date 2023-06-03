@@ -12,7 +12,7 @@ const generateAction = async(req, res) =>{ //async = wait till the await specifi
     
     console.log(`API input =  ${basePrompt}${req.body.userInput}`);
 
-    const baseCompletion = await openai.completion({ //async will wait till this is complete
+    const baseCompletion = await openai.createCompletion({ //async will wait till this is complete
         model: 'text-davinci-003',
         prompt: `${basePrompt}${req.body.userInput}`,
         temperature: 0.7,

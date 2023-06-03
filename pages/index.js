@@ -8,6 +8,8 @@ const Home = () => {
   const [apiOutput, setApiOutput] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
 
+  //generate action function
+
   const callGenerate = async() => {
     setIsGenerating(true);
     
@@ -28,9 +30,11 @@ const Home = () => {
     setApiOutput(`${output.text}`);
     setIsGenerating(false);
   }
+
+  //capture changed input
   
   const setUserChangedInput = (event) =>{
-    console.log(JSON.stringify({userInput}));
+    // console.log(JSON.stringify({userInput}));
     setUserInput(event.target.value);
   }
 
@@ -58,25 +62,28 @@ const Home = () => {
           />
         </div>
         <div className='prompt-buttons'>
-          <a className='generate-button' onClick={callGenerate}>
+          <a
+           className={isGenerating? 'generate-button loading': 'generate-button'}
+           onClick={callGenerate}
+          >
             <div className='generate'>
-              <p>Generate</p>
+            {isGenerating ? <span className="loader"></span> :<p>Generate</p>}
             </div>
           </a>          
         </div>
       </div>
-      <div className="badge-container grow">
-        <a
-          href="https://buildspace.so/builds/ai-writer"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div className="badge">
-            <Image src={buildspaceLogo} alt="buildspace logo" />
-            <p>build with buildspace</p>
+      {apiOutput &&
+      (<div className='output'>
+        <div className="output-header-container">
+          <div className='output-header'>
+            <h3>Output</h3>
           </div>
-        </a>
-      </div>
+        </div>
+        <div className="output-content">
+          <p>{apiOutput}</p>
+        </div>
+      </div>)}
+      
     </div>
   );
 };
