@@ -56,7 +56,7 @@ const Home = () => {
           <textarea
           name="postContent"
           className='prompt-box' 
-          placeholder='insert prompt here' 
+          placeholder='I want to become a systems programmer but have limited knowledge of low level programming. I can study 10 hours per week and only want video resources. I want to learn to code in Rust. Create a study plan for me' 
           value={userInput}
           onChange={setUserChangedInput}
           />
