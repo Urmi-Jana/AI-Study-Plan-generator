@@ -270,7 +270,7 @@ textarea {
 
 .output {
     place-content: center flex-start;
-    align-items: center;
+    align-items: normal;
     display: flex;
     flex: 0 0 auto;
     flex-flow: column nowrap;
@@ -321,7 +321,7 @@ textarea {
 }
 
 .output-content p {
-    text-align: center;
+    text-align: normal;
     white-space: pre-line;
     color: rgba(255, 255, 255, 0.5);
 }
